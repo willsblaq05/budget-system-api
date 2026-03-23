@@ -1,0 +1,5 @@
+.env
+__pycache__
+venv/
+index.html
+alembic/versions/*.pyc
