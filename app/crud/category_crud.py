@@ -11,9 +11,9 @@ def create_category(db: Session, category: schemas.CategoryCreate, user_id: int)
 def get_categories(db: Session, user_id: int):
     return db.query(models.Category).filter(models.Category.user_id == user_id).all()   
 
-def get_category_or_404(db:Session, category_id:int):
+def get_category_or_404(db:Session, category_id):
     category = db.query(models.Category).filter(models.Category.id == category_id).first()
     if not category or category.user_id :
-        raise HTTPException(status_code=404, detail="Category not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
     return category
         

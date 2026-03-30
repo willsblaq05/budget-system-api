@@ -40,3 +40,17 @@ class CategoryResponse(CategoryBase):
 
     class Config:
         orm_mode = True
+
+class BudgetBase(BaseModel):
+    category_id: int
+    amount: float
+    month: str
+    year: int
+class BudgetCreate(BudgetBase):
+    pass
+class BudgetResponse(BudgetBase):
+    id: int
+    user_id: int
+
+    class Config:
+        orm_mode = True   

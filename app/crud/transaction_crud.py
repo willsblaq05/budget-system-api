@@ -7,7 +7,7 @@ from .. import models, schemas
 from app.crud.category_crud import get_category_or_404
 def create_transaction(db: Session, transaction: schemas.TransactionCreate, user_id:int):
      # 🔥 Validate category
-    category = get_category_or_404(  db, transaction.category_id)
+    category = get_category_or_404(db, transaction.category_id)
 
     new_transaction = models.Transactions(**transaction.dict(), user_id=user_id)
     db.add(new_transaction)
