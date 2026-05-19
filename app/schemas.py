@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from typing import List
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -44,7 +45,7 @@ class CategoryResponse(CategoryBase):
 class BudgetBase(BaseModel):
     category_id: int
     amount: float
-    month: str
+    month: int
     year: int
 class BudgetCreate(BudgetBase):
     pass
@@ -54,3 +55,52 @@ class BudgetResponse(BudgetBase):
 
     class Config:
         orm_mode = True   
+
+class TotalSpendingResponse(BaseModel):
+    month: int
+    year : int
+    total_spent : float
+
+    class Config:
+        orm_mode = True
+
+class CategorySpending(BaseModel):
+    category: str
+    amount: float
+
+class SpendingByCategoryResponse(BaseModel):
+    month:int
+    year:int
+    breakdown: List[CategorySpending]
+    class Config:
+        orm_mode = True
+
+class BudgetVsActualResponse(BaseModel):
+    month : int
+    year : int
+    budgeted : float
+    spent : float
+    difference : float
+
+    class Config:
+        orm_mode = True
+
+class BudgetVsSpendingResponse(BaseModel):
+    month: int
+    year: int
+    total_budget: float
+    total_spent: float
+    remaining: float
+    class Config:
+        orm_mode = True
+
+class CategoryBreakdownItem(BaseModel):
+    category: str
+    amount: float
+
+class CategoryBreakdownResponse(BaseModel):
+    month: int
+    year: int
+    breakdown: List[CategoryBreakdownItem]
+    class Config:
+        orm_mode = True

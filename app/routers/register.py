@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from ..import models, schemas, utils
 from ..Database import get_db
-
 router = APIRouter(
     prefix="/register",
     tags=["Register"]
@@ -18,8 +17,3 @@ def register(user: schemas.UserCreate, db:Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
-
-
-
-
-    

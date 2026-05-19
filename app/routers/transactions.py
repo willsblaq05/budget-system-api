@@ -17,12 +17,12 @@ def make_transaction(transaction:schemas.TransactionCreate,
                       db : Session = Depends(get_db),
                         current_user: models.User = Depends(get_current_user)):
 
-    return transaction_crud.create_transaction(db, transaction, current_user.id)
+    return transaction_crud.create_transaction(current_user.id ,db, transaction)
 #Get all transactions for current user
 
 @router.get("/", response_model=list[schemas.TransactionResponse])
 def get_transactions(db: Session = Depends(get_db), current_user :models.User = Depends(get_current_user)):
-    return transaction_crud.get_transactions(db, current_user.id)
+    return transaction_crud.get_transactions( current_user.id, db)
 
 #Delete a transaction
 @router.delete("/{transaction_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -33,9 +33,3 @@ def delete_transaction(transaction_id: int, db:Session=Depends(get_db), current_
     db.delete(transaction)
     db.commit()
     return {"detail": "Transaction deleted"}
-
-    
-
-
-
-

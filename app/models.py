@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer,Float,String, DateTime, ForeignKey
 from datetime import datetime
 from .Database import Base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Mapped, mapped_column
 class User(Base):
     __tablename__ = "users"
 
@@ -21,6 +21,7 @@ class Transactions(Base):
     type = Column(String, nullable = False)
     description = Column(String)
     user_id = Column(Integer, ForeignKey("users.id"))
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     user = relationship("User", back_populates ="transactions")
     category_id = Column(Integer, ForeignKey("categories.id"))

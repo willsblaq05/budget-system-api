@@ -15,4 +15,4 @@ def create_category(category: schemas.CategoryCreate, db: Session = Depends(get_
 
 @router.get("/", response_model=list[schemas.CategoryResponse])
 def get_categories(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
-    return category_crud.get_categories(db, current_user.id)
+    return category_crud.get_categories(db, current_user.id) 

@@ -7,7 +7,6 @@ router =APIRouter(
     prefix="/login",
     tags=["Login"]
 )
-
 @router.post("/", response_model=schemas.Token)
 def login(user: schemas.UserLogin, db:Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()

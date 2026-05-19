@@ -1,5 +1,6 @@
-from fastapi import FastAPI
-from app.routers import auth, register, transactions, categories, budget
+from fastapi import FastAPI;
+from app.routers import auth, register, transactions, categories, budget, analytics,budget_vs_spending,Category_breakdown
+
 
 
 
@@ -9,6 +10,9 @@ app.include_router(register.router)
 app.include_router(transactions.router)
 app.include_router(categories.router)
 app.include_router(budget.router)
+app.include_router(analytics.router)
+app.include_router(budget_vs_spending.router)
+app.include_router(Category_breakdown.router)
 
 @app.get("/")
 def root():
