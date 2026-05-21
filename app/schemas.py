@@ -104,3 +104,16 @@ class CategoryBreakdownResponse(BaseModel):
     breakdown: List[CategoryBreakdownItem]
     class Config:
         orm_mode = True
+
+class BudgetVsCategoryItem(BaseModel):
+    category: str
+    budgeted: float
+    spent: float
+    difference: float
+
+class BudgetVsCategoryResponse(BaseModel):
+    month: int
+    year: int
+    categories: List[BudgetVsCategoryItem]
+    class Config:
+        orm_mode = True
