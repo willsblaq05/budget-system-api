@@ -27,7 +27,7 @@ class TransactionResponse(TransactionCreate):
     user_id : int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CategoryBase(BaseModel):
     name: str
@@ -40,7 +40,7 @@ class CategoryResponse(CategoryBase):
     user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class BudgetBase(BaseModel):
     category_id: int
@@ -54,7 +54,7 @@ class BudgetResponse(BudgetBase):
     user_id: int
 
     class Config:
-        orm_mode = True   
+        from_attributes = True   
 
 class TotalSpendingResponse(BaseModel):
     month: int
@@ -62,7 +62,7 @@ class TotalSpendingResponse(BaseModel):
     total_spent : float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CategorySpending(BaseModel):
     category: str
@@ -73,7 +73,7 @@ class SpendingByCategoryResponse(BaseModel):
     year:int
     breakdown: List[CategorySpending]
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class BudgetVsActualResponse(BaseModel):
     month : int
@@ -83,7 +83,7 @@ class BudgetVsActualResponse(BaseModel):
     difference : float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class BudgetVsSpendingResponse(BaseModel):
     month: int
@@ -92,7 +92,7 @@ class BudgetVsSpendingResponse(BaseModel):
     total_spent: float
     remaining: float
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CategoryBreakdownItem(BaseModel):
     category: str
@@ -103,7 +103,7 @@ class CategoryBreakdownResponse(BaseModel):
     year: int
     breakdown: List[CategoryBreakdownItem]
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class BudgetVsCategoryItem(BaseModel):
     category: str
@@ -116,4 +116,4 @@ class BudgetVsCategoryResponse(BaseModel):
     year: int
     categories: List[BudgetVsCategoryItem]
     class Config:
-        orm_mode = True
+        from_attributes = True

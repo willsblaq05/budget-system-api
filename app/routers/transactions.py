@@ -12,7 +12,7 @@ router = APIRouter(
 )
 
 #Create transaction
-@router.post("/", response_model=schemas.TransactionResponse)
+@router.post("/create", response_model=schemas.TransactionResponse)
 def make_transaction(transaction:schemas.TransactionCreate,
                       db : Session = Depends(get_db),
                         current_user: models.User = Depends(get_current_user)):
@@ -20,12 +20,12 @@ def make_transaction(transaction:schemas.TransactionCreate,
     return transaction_crud.create_transaction(current_user.id ,db, transaction)
 #Get all transactions for current user
 
-@router.get("/", response_model=list[schemas.TransactionResponse])
+@router.get("/get", response_model=list[schemas.TransactionResponse])
 def get_transactions(db: Session = Depends(get_db), current_user :models.User = Depends(get_current_user)):
     return transaction_crud.get_transactions( current_user.id, db)
 
 #Delete a transaction
-@router.delete("/{transaction_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/delete/{transaction_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_transaction(transaction_id: int, db:Session=Depends(get_db), current_user:models.User = Depends(get_current_user)):
     transaction = db.query(models.Transactions).filter(models.Transactions.id == transaction_id, models.Transactions.user_id == current_user.id).first()
     if not transaction:

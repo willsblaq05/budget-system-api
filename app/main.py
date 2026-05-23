@@ -1,5 +1,5 @@
 from fastapi import FastAPI;
-from app.routers import auth, register, transactions, categories, budget, analytics,budget_vs_spending,Category_breakdown
+from app.routers import auth, register, transactions, categories, budget, analytics
 
 
 

@@ -6,7 +6,7 @@ from app.crud.category_crud import get_category_or_404
 
 def create_budget( user_id:int, db: Session, budget: schemas.BudgetCreate):
     # Validate category
-    get_category_or_404(db, budget.category_id, user_id)
+    get_category_or_404(db, budget.category_id)
     new_budget = models.Budget(**budget.dict(), user_id=user_id)
     db.add(new_budget)
     db.commit()

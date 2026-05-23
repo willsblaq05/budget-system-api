@@ -4,7 +4,7 @@ from .. import models, schemas
 
 def create_transaction(user_id:int, db: Session, transaction: schemas.TransactionCreate):
     #  Validate category
-    category = get_category_or_404(db, transaction.category_id, user_id)
+    category = get_category_or_404(db, transaction.category_id)
     new_transaction = models.Transactions(**transaction.dict(), user_id=user_id)
     db.add(new_transaction)
     db.commit()

@@ -16,6 +16,6 @@ def create_budget( budget: schemas.BudgetCreate ,db:Session =Depends(get_db), cu
     category = get_category_or_404(db, budget.category_id)
     return budget_crud.create_budget(current_user.id, db, budget)
 
-@router.get("/", response_model=list[schemas.BudgetResponse])
-def get_budgets(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+@router.get("/get", response_model=list[schemas.BudgetResponse])
+def GetBudgets(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     return budget_crud.get_budgets( current_user.id, db)
