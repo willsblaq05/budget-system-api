@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends,status
 from sqlalchemy.orm import Session
 from ..import models, schemas, utils
 from ..Database import get_db
@@ -7,7 +7,7 @@ router = APIRouter(
     tags=["Register"]
 )
 #Register users
-@router.post("/")
+@router.post("/", status_code=status.HTTP_201_CREATED)
 def register(user: schemas.UserCreate, db:Session = Depends(get_db)):
     hashed_password = utils.hash_password(user.password)
     user_dict = user.dict()

@@ -12,6 +12,6 @@ app.include_router(categories.router)
 app.include_router(budget.router)
 app.include_router(analytics.router)
 
-@app.get("/")
+@app.get("/health")
 def root():
     return{"Message":"Finance API is running"}

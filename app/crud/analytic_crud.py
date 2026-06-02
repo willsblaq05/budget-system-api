@@ -69,10 +69,25 @@ def BudgetVsCategory(user_id:int, month:int, year:int, db:Session):
     spending_dict = {name: total for name, total in spending_category}
     
     categories = set(budget_dict.keys()) | set(spending_dict.keys())
+    return [
+        {
+            "month": month,
+            "year": year,
+            "categories":[
+                {
+                    "category": category,
+                    "budgeted": float(budget_dict.get(category, 0)),
+                    "spent": float(spending_dict.get(category, 0)),
+                    "difference": float(budget_dict.get(category, 0) - spending_dict.get(category, 0)),
+                }
+            ]
+        }
+        for category in sorted(categories)
+    ]
     
-    
+
 def DailySpending(user_id:int, month:int, year:int, db:Session):
-    daily_trend = db.query(
+    return db.query(
         extract('day', models.Transactions.created_at).label('day'),
         func.coalesce(func.sum(models.Transactions.amount), 0)
     ).filter(
@@ -80,5 +95,7 @@ def DailySpending(user_id:int, month:int, year:int, db:Session):
         models.Transactions.type == "expense",
         extract('month', models.Transactions.created_at) == month,
         extract('year', models.Transactions.created_at) == year
-    ).group_by(extract('day', models.Transactions.created_at)).all()
+    ).group_by(extract('day', models.Transactions.created_at)
+                ).order_by(extract('day', models.Transactions.created_at)).all()
+    
     

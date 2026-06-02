@@ -117,3 +117,14 @@ class BudgetVsCategoryResponse(BaseModel):
     categories: List[BudgetVsCategoryItem]
     class Config:
         from_attributes = True
+
+class DailySpendingItem(BaseModel):
+    date: str
+    amount: float   
+
+class DailySpendingResponse(BaseModel):
+    month: int
+    year: int
+    daily_spending: List[DailySpendingItem]
+    class Config:
+        from_attributes = True
